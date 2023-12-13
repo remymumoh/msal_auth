@@ -73,7 +73,6 @@ class MsalMobile {
       throw MsalMobileException.fromErrorCode(
           MsalMobileExceptionErrorCode.notInitialized);
     }
-
     final accounts = await getAccount();
     return accounts != null && accounts.currentAccount != null;
   }

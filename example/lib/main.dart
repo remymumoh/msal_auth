@@ -12,8 +12,10 @@ class _MyAppState extends State<MyApp> {
   static const String SCOPE = 'api://1b96e9ff-c59a-4123-8fa4-fcd1a76c1b06/user_impersonation';
   static const String TENANT_ID = 'organizations';
   static String authority = "https://login.microsoftonline.com/$TENANT_ID";
+  String loginHint = "";
 
-  MsalMobile msal;
+
+  MsalMobile? msal;
   bool isSignedIn = false;
 
   @override
@@ -29,7 +31,7 @@ class _MyAppState extends State<MyApp> {
 
   /// Updates the signed in state
   refreshSignedInStatus() {
-    msal.getSignedIn().then((loggedIn) {
+    msal?.getSignedIn().then((loggedIn) {
       print('refreshing');
       setState(() {
         isSignedIn = loggedIn;
@@ -40,13 +42,13 @@ class _MyAppState extends State<MyApp> {
   logMsalMobileError(MsalMobileException exception) {
     print('${exception.errorCode}: ${exception.message}');
     if (exception.innerException != null) {
-      print('inner exception = ${exception.innerException.errorCode}: ${exception.innerException.message}');
+      print('inner exception = ${exception.innerException!.errorCode}: ${exception.innerException!.message}');
     }
   }
 
   /// Signs a user in
   handleSignIn() async {
-    await msal.signIn(null, [SCOPE]).then((result) {
+    await msal?.signIn(loginHint,[SCOPE]).then((result) {
       refreshSignedInStatus();
     }).catchError((exception) {
       if (exception is MsalMobileException) {
@@ -62,7 +64,7 @@ class _MyAppState extends State<MyApp> {
   /// Gets a token silently unless the interactive experience is required.
   handleGetToken() async {
     // you would use this instead to auth for all organizations: "https://login.microsoftonline.com/common"
-    await msal.acquireToken([SCOPE], authority).then((result) {
+    await msal?.acquireToken([SCOPE], authority).then((result) {
       print('access token (truncated): ${result.accessToken}');
     }).catchError((exception) {
       if (exception is MsalMobileException) {
@@ -75,7 +77,7 @@ class _MyAppState extends State<MyApp> {
 
   /// Get a token interactively.
   handleGetTokenInteractively() async {
-    await msal.acquireTokenInteractive([SCOPE]).then((result) {
+    await msal?.acquireTokenInteractive([SCOPE]).then((result) {
       print('access token (truncated): ${result.accessToken}');
     }).catchError((exception) {
       if (exception is MsalMobileException) {
@@ -92,7 +94,7 @@ class _MyAppState extends State<MyApp> {
   handleGetTokenSilently() async {
     String authority = "https://login.microsoftonline.com/$TENANT_ID";
     // you would use this instead to auth for all organizations: "https://login.microsoftonline.com/common"
-    await msal.acquireTokenSilent([SCOPE], authority).then((result) {
+    await msal?.acquireTokenSilent([SCOPE], authority).then((result) {
       print('access token (truncated): ${result.accessToken}');
     }).catchError((exception) {
       if (exception is MsalMobileException) {
@@ -107,7 +109,7 @@ class _MyAppState extends State<MyApp> {
   handleSignOut() async {
     try {
       print('signing out');
-      await msal.signOut();
+      await msal?.signOut();
       print('signout done');
       refreshSignedInStatus();
     } on MsalMobileException catch (exception) {
@@ -117,9 +119,9 @@ class _MyAppState extends State<MyApp> {
 
   /// Gets the current and prior accounts.
   handleGetAccount() async {
-    await msal.getAccount().then((result) {
+    await msal?.getAccount().then((result) {
       if (result.currentAccount != null) {
-        print('current account id: ${result.currentAccount.id}');
+        print('current account id: ${result.currentAccount!.id}');
       } else {
         print('no account found');
       }

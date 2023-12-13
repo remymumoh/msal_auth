@@ -31,7 +31,7 @@
                 <category android:name="android.intent.category.BROWSABLE" />
                 <data
                     android:host="com.remy.msal_auth_example"
-                    android:path="/ldYUHWCGNN20tqnfF/8PbpDXSXM="
+                    android:path="/aaw0Yc301KuAUsFiv0tFo0H9hPY="
                     android:scheme="msauth" />
             </intent-filter>
         </activity>

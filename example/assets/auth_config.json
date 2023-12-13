@@ -1,15 +1,15 @@
 {
-  "client_id" : "e5a55502-c69d-4135-a49d-0e5d0cd5049c",
+  "client_id" : "7f91a359-f39f-4df3-9ee5-275e5f1aff2f",
   "authorization_user_agent" : "DEFAULT",
-  "redirect_uri" : "msauth://com.remy.msal_auth_example/ldYUHWCGNN20tqnfF%2F8PbpDXSXM%3D",
+  "redirect_uri" : "msauth://com.remy.msal_auth_example/aaw0Yc301KuAUsFiv0tFo0H9hPY%3D",
   "ios_redirect_uri": "msauth.<your-ios-bundle-identifier>://auth",
   "account_mode": "SINGLE",
   "authorities" : [
     {
       "type": "AAD",
       "audience": {
-       "type": "AzureADMyOrg",
-       "tenant_id": "organizations"
+        "type": "AzureADMyOrg",
+        "tenant_id": "organizations"
       }
     }
   ],

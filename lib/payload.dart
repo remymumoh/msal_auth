@@ -15,8 +15,6 @@ class MsalMobileGetAccountResultPayload extends MsalMobileResultPayload {
 }
 
 
-
-
 class MsalMobileAuthenticationResultPayload extends MsalMobileResultPayload {
   final bool cancelled;
   final bool success;
